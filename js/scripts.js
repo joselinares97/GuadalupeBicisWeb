@@ -52,3 +52,36 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
+
+document.getElementById("submitButton").addEventListener("click", function(event) {
+    // Prevenir el comportamiento por defecto del formulario
+    event.preventDefault();
+
+    // Capturar los valores de los campos del formulario
+    var name = document.getElementById("name").value;
+    var phone = document.getElementById("phone").value;
+    var message = document.getElementById("message").value;
+
+    // Log para verificar que los valores se obtienen correctamente
+    console.log("Name:", name);
+    console.log("Phone:", phone);
+    console.log("Message:", message);
+
+    // Validar que los campos no estén vacíos
+    if (name === "" || phone === "" || message === "") {
+        alert("Por favor, todos los campos son requeridos.");
+        return;
+    }
+
+    // Crear el mensaje para WhatsApp
+    var whatsappMessage = `Hola, soy ${name}. Mi teléfono es ${phone}. Tengo el siguiente mensaje: ${message}`;
+    
+    // Número de WhatsApp donde quieres recibir los mensajes (sin el +)
+    var phoneNumber = "573025931546"; // Reemplaza con tu número de WhatsApp
+
+    // Crear la URL de WhatsApp con el mensaje
+    var whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+    // Abrir WhatsApp en una nueva ventana
+    window.open(whatsappURL, '_blank');
+});
